@@ -1,27 +1,31 @@
 import { useEffect, useState } from "react";
+
 import axios from "axios";
+import Posts from "./Posts";
 
 export default function App() {
-    const [count, setCount] = useState(null);
+    const [post, setPost] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await axios.get('http://localhost:3000/posts');
-                setCount(res.data);
+                console.log(JSON.stringify(res.data),"asdadasd")
+                setPost(res.data);
             } catch (error) {
                 alert("Error fetching data: " + error.message);
             }
         };
 
         fetchData();
-    }, []);
+    });
 
     return (
         <div>
-            <h1 className="text-3xl font-bold underline">
-                {count ? JSON.stringify(count, null, 2) : "Loading..."}
-            </h1>
+           <>
+                {!post ?  "Loading...":post.map(elem=><Posts key={elem._id} data={elem}/>)}
+           </>
+            
         </div>
     );
 }
