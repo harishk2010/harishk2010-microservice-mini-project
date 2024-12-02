@@ -1,41 +1,41 @@
 const axios = require('axios');
 const express = require('express');
 const cors = require('cors');
-const {  connectDB } = require('./DB/conncetion');
+const { connectDB } = require('./DB/conncetion');
 const app = express();
 connectDB();
 
-// Middleware
-app.use(cors()); // Allow requests from frontend
-app.use(express.json()); // Parse incoming JSON payloads
-let {Posts}=require('./models/postSchema')
-const port=3000
+
+app.use(cors());
+app.use(express.json());
+let { Posts } = require('./models/postSchema')
+const port = 3000
 
 app.get('/posts', async (req, res) => {
     try {
-        Posts.find().then((data)=>{
+        Posts.find().then((data) => {
             res.status(200).json(data)
-            })
- 
+        })
+
     } catch (error) {
         res.status(500).json({ error: 'Failed to send data', details: error.message });
     }
 })
-app.post('/posts',async(req,res)=>{
+app.post('/posts', async (req, res) => {
     try {
-        const response=req.body
+        const response = req.body
         console.log(response)
-        let postData=await Posts.create(response)
+        let postData = await Posts.create(response)
 
-        
-        await axios.post('http://localhost:4000/notify',{
-            message:response.name,
-            PORT:response.port
+
+        await axios.post('http://localhost:4000/notify', {
+            message: response.name,
+            PORT: response.port
         })
-       
-        res.status(200).json({status:"DOne"})
+
+        res.status(200).json({ status: "DOne" })
     } catch (error) {
-        
+
     }
 })
 

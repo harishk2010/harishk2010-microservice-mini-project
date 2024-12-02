@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const CommentSchema = mongoose.Schema({
-    id: {
-        type: Number,
-        required: true,
-    },
+    
     postId: { // Reference to the post
         type: String,
         required: true,
