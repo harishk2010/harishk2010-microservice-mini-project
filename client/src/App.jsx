@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Posts from "./Posts";
 
+
 export default function App() {
     const [post, setPost] = useState(null);
 
@@ -21,7 +22,8 @@ export default function App() {
     },[]);
 
     return (
-        <div>
+        <div class="md:grid grid-cols-1 gap-3 sm:grid-cols-3 lg:grid-col-4">
+            
            <>
                 {!post ?  "Loading...":post.map(elem=><Posts key={elem._id} data={elem}/>)}
            </>

@@ -33,7 +33,7 @@ const Posts = ({ data }) => {
   };
 
   return (
-    <div className="bg-blue-600  h-[100px] flex flex-col justify-center items-center m-5 ">
+    <div className="bg-blue-600 w-[30rem] h-[100px] flex flex-col justify-center items-center m-5 ">
       <h1 className="font-semibold text-blue-50 ">{title}</h1>
       <p>id: {id}</p>
       <form onSubmit={handleSubmit}>
